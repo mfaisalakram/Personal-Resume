@@ -2,64 +2,124 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Faisal Akram - CV</title>
+<title>Faisal Akram - MERN</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@media print {
-    body {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-}
-
 @page {
     size: A4;
     margin: 0;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+}
+
+body {
     font-family: 'Montserrat', sans-serif;
     font-size: 10pt;
     color: #4a5568;
     background: #f1f3f7;
 }
 
-.page {
+.cv-sheet {
     width: 210mm;
-    min-height: 297mm;
-    page-break-after: always;
+    margin: 0 auto;
     background: white;
+    box-sizing: border-box;
 }
 
-/* PAGE 1 */
-.page.flex {
+@media screen {
+    .cv-sheet--profile {
+        min-height: 297mm;
+        margin-bottom: 20px;
+    }
+}
+
+/* PAGE 1 layout */
+.cv-sheet--profile {
     display: flex;
 }
 
 .sidebar {
-    width: 40%;
+    flex: 0 0 38%;
     background: #f1f3f7;
     padding: 30px 25px;
     border-right: 1px solid #e2e8f0;
+    box-sizing: border-box;
 }
 
 .main {
-    width: 67%;
+    flex: 1;
     background: #ffffff;
     padding: 30px 35px;
+    box-sizing: border-box;
 }
 
-/* PAGE 2 */
-.page.full {
-    display: block;
-}
-
-.main.full-width {
-    width: calc(100% - 70px);
+/* PAGE 2 (projects) */
+.cv-sheet--projects .main {
     padding: 40px 35px;
+}
+
+.cv-sheet--projects a {
+    color: #0000ee;
+    text-decoration: underline;
+}
+
+@media print {
+    html,
+    body {
+        width: 210mm;
+        height: auto !important;
+        background: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .cv-sheet {
+        width: 100%;
+        min-height: 0 !important;
+        height: auto !important;
+        margin: 0;
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+
+    /* Flex breaks badly in Chrome print — use floats for page 1 only */
+    .cv-sheet--profile {
+        display: block;
+    }
+
+    .cv-sheet--profile::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .cv-sheet--profile .sidebar {
+        float: left;
+        width: 38%;
+    }
+
+    .cv-sheet--profile .main {
+        float: right;
+        width: 62%;
+    }
+
+    .cv-sheet--projects .main {
+        float: none;
+        width: 100%;
+    }
+
+    /* Start projects on a new sheet — never use break-after on the block above */
+    .cv-sheet--projects {
+        clear: both;
+        page-break-before: always;
+        break-before: page;
+    }
 }
 
 /* TYPOGRAPHY */
@@ -145,7 +205,7 @@ h2 {
 <body>
 
 <!-- PAGE 1 -->
-<div class="page flex">
+<div class="cv-sheet cv-sheet--profile">
 
     <div class="sidebar">
         <h1>Faisal Akram</h1>
@@ -259,9 +319,9 @@ managment.
 </div>
 
 <!-- PAGE 2 -->
-<div class="page full">
+<section class="cv-sheet cv-sheet--projects">
 
-    <div class="main full-width">
+    <div class="main">
 
         <h2>PROJECTS done</h2>
         <div class="section-line"></div>
@@ -280,7 +340,7 @@ managment.
 
         <div class="item">
             <div class="bold-title">Primary Leap</div>
-            <p class="small"><a href="https://primaryleap.co.uk" target="_blank" style="color: inherit; text-decoration: none;">https://primaryleap.co.uk</a></p>
+            <p class="small"><a href="https://primaryleap.co.uk" target="_blank">https://primaryleap.co.uk</a></p>
             <p class="description">
                 educational platform designed to bridge  communication gap between students & teachers through real-time interaction. my responsibility in this was craeting  a custom Question and Lesson Builder using GrapesJS js library ( page builder tool ), <span style="font-weight: 600;">enabling teachers to create interactive, dynamic content without coding</span>. Integrated Socket.io for instant messaging, ensuring a responsive learning environment that supports live collaboration and assessment.
             </p>
@@ -288,7 +348,7 @@ managment.
 
         <div class="item">
             <div class="bold-title">American Song Writer</div>
-            <p class="small"><a href="https://contests.americansongwriter.com" target="_blank" style="color: inherit; text-decoration: none;">https://contests.americansongwriter.com</a></p>
+            <p class="small"><a href="https://contests.americansongwriter.com" target="_blank">https://contests.americansongwriter.com</a></p>
             <p class="description">
                 developed a full-scale contest management system to streamline song submissions &  judging workflows. <span style="font-weight: 600;">Implemented secure payment processing with Stripe and managed complex user sessions using Supabase and Next.js Server Actions</span>.
                 <br>
@@ -299,7 +359,7 @@ managment.
 
         <div class="item">
             <div class="bold-title">Get Vipcare</div>
-            <p class="small"><a href="https://getvipcare.com" target="_blank" style="color: inherit; text-decoration: none;">https://getvipcare.com</a></p>
+            <p class="small"><a href="https://getvipcare.com" target="_blank">https://getvipcare.com</a></p>
             <p class="description">
                 these were high-performance landing &  location-based ecosystem designed to capture leads and drive clinic marketing. 
                   <br>
@@ -320,7 +380,7 @@ edit or add options based on their role.
 
         <div class="item">
             <div class="bold-title">Pawcker</div>
-            <p class="small"><a href="https://www.pawcker.com" target="_blank" style="color: inherit; text-decoration: none;">https://www.pawcker.com</a></p>
+            <p class="small"><a href="https://www.pawcker.com" target="_blank">https://www.pawcker.com</a></p>
             <p class="description">
                 <span style="font-weight: 600;">Excited to show you, my first real time project</span>, where I focused on frontend development (Reactjs), this 
 platform is for dog sports enthusiasts, help them track their wins and maintain a clear record of their 
@@ -330,7 +390,7 @@ achievements.
 
     </div>
 
-</div>
+</section>
 
 </body>
 </html>
